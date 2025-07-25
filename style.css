@@ -1,0 +1,77 @@
+/* Feedback */
+input{
+    width: 100%;
+    height: 25px;
+    margin: 12px 0;
+    border: 1px solid #929292;
+}
+
+textarea{
+    width: 100%;
+    height: 25px;
+    margin: 12px 0;
+    border: 1px solid #929292;
+}
+
+.button{
+    display: block;
+    background-color: #ffa9f9;
+    text-decoration: none;
+    text-align: center;
+    color: #7a6200;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 12px 0;
+    padding: 8px 0;
+}
+
+/* Text */
+h2{
+    text-align: justify;
+    font-family: cursive;
+    font-size: 30px;
+    color: #7a6200;
+    font-style: italic;    
+}
+
+p{
+    font-family: serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #fff7ad;
+    font-family: Arial, sans-serif;
+}
+
+/* Pop Up */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .popup-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  
+  .close {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: -10px;
+  }
