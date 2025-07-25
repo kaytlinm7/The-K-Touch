@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>The K Touch</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("clpr1eXRVf0_3IaaD"); // ✅ Your EmailJS Public Key
+
+    function showPopup(name) {
+      document.getElementById("popupMessage").innerText =
+        `Thank you, ${name}, for booking! We'll get back to you shortly.`;
+      document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    window.onclick = function (event) {
+      const popup = document.getElementById("popup");
+      if (event.target === popup) {
+        popup.style.display = "none";
+      }
+    };
+
+    window.onload = function () {
+      const form = document.getElementById("bookingForm");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = form.querySelector('[name="name"]').value;
+        const email = form.querySelector('[name="email"]').value;
+        const service = form.querySelector('[name="service"]').value;
+        const date = form.querySelector('[name="date"]').value;
+
+        // First: send booking to yourself
+        emailjs.sendForm("service_pu456md", "template_pamynig", this)
+          .then(function () {
+            showPopup(name);
+            form.reset();
+          }, function (error) {
+            alert("Oops! Something went wrong:\n" + error.text);
+          });
+
+        // Second: send confirmation auto-reply to client
+        emailjs.send("service_pu456md", "template_90c716d", {
+          to_email: email,
+          name: name,
+          service: service,
+          date: date
+        });
+      });
+    };
+  </script>
+</head>
+<body>
+  <img src="images/weblogo.png" />
+  <h2>Hey Lash Huns</h2>
+  <p>At <b>The K Touch</b>, we believe beauty is in the details – and your lashes deserve nothing but the best.</p>
+  <p>Whether you're after a subtle classic set or a bold volume look, we got you.</p>
+  <p>The K Touch is more than just a service – it’s your go-to space to feel confident, pampered, and picture-perfect.</p>
+
+  <h2>Services Available</h2>
+  <img src="images/classic .png" />
+  <h2>What makes a Classic Lash Set Special?</h2>
+  <ul>
+    <li><b>Natural Look:</b> Enhances length, curl, and darkness of natural lashes.</li>
+    <li><b>Lightweight:</b> One extension per lash – gentle for everyday wear.</li>
+    <li><b>Ideal for:</b> First-time clients or anyone wanting a simple, elegant look.</li>
+  </ul>
+  <p>Get your Classic Set for <b>R150</b></p>
+
+  <img src="images/cluster.png" />
+  <h2>What makes a Cluster Lash Set Special?</h2>
+  <ul>
+    <li><b>Quick Application:</b> Perfect for same-day events.</li>
+    <li><b>Bold & Dramatic:</b> Fuller, noticeable glam in minutes.</li>
+    <li><b>Ideal for:</b> Clients seeking temporary, budget-friendly lash sets.</li>
+  </ul>
+  <p><b>Note:</b> Cluster lashes are not meant for long-term wear and can cause damage if not removed properly!</p>
+  <p>Get your Cluster Set for <b>R120</b></p>
+
+  <img src="images/removal.png" />
+  <h2>What makes Lash Removal Important?</h2>
+  <ul>
+    <li><b>Safe & Gentle:</b> Protects your natural lashes from pulling and breaking.</li>
+    <li><b>Clean Start:</b> Prepares your lashes for a fresh new set or a lash break.</li>
+    <li><b>Ideal for:</b> Clients with outgrown, tangled or uncomfortable lashes.</li>
+  </ul>
+  <p><b>Avoid DIY removal!</b> Professional removal ensures your lashes stay healthy and intact.</p>
+  <p>Get your Lash Set removed for <b>R100</b></p>
+
+  <div id="main">
+    <div id="content">
+      <div id="info-box-full">
+        <img src="images/book.png" />
+        <h2>Book Your Set Today</h2>
+        <p>Fill in your details to make your booking</p>
+
+        <form id="bookingForm">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="tel" name="contact" placeholder="Your contact" required 
+            pattern="[0-9]{10}" maxlength="10"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+          <input type="email" name="email" placeholder="Your email" required />
+
+          <select name="service" required>
+            <option value="">Select Lash Set</option>
+            <option value="Classic Set">Classic Set</option>
+            <option value="Cluster Set">Cluster Set</option>
+            <option value="Removal">Removal</option>
+          </select>
+
+          <input type="date" name="date" required />
+          <textarea name="notes" placeholder="Any specific requests or notes?"></textarea>
+          <button class="button" type="submit">SUBMIT</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <h2>Message Received</h2>
+      <p id="popupMessage">Thank you for booking! We'll get back to you shortly.</p>
+    </div>
+  </div>
+</body>
+</html>
